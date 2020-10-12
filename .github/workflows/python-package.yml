@@ -16,7 +16,6 @@ jobs:
     strategy:
       matrix:
         python-version: [3.8]
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
@@ -30,10 +29,11 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: file Change
-      run: git diff-tree --no-commit-id --name-only -r ${{ github.sha }}
+      run: diff = repo.git.diff('HEAD~1..HEAD', name_only=True); print(diff)
 
     - name: Run Hello World
       run: python test_2.py
 
     - name: Run Hello World
       run: python test.py
+      
